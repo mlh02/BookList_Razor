@@ -19,7 +19,7 @@ namespace BookList_Razor.Model.BookList
 
         public IEnumerable<Book> Books { get; set; }
 
-        public async void OnGet()
+        public async Task OnGet()
         {
             Books = await _db.Books.ToListAsync();
         }
