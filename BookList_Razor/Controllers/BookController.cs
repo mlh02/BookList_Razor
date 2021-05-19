@@ -16,10 +16,14 @@ namespace BookListRazor.Controllers
     {
         private readonly DataBaseContext _db;
 
+        public BookController(DataBaseContext db)
+        {
+            _db = db;
+        }
+
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            return Json(new { data = _db.Book.ToList() });
             return Json(new { data = await _db.Book.ToListAsync() });
         }
 
@@ -33,7 +37,7 @@ namespace BookListRazor.Controllers
             }
             _db.Book.Remove(bookFromDb);
             await _db.SaveChangesAsync();
-            return Json(new { succues = true, message = "Delete successful" });
+            return Json(new { success = true, message = "Delete successful" });
         }
     }
 }
