@@ -9,6 +9,6 @@ namespace BookList_Razor.Model
         public DataBaseContext(DbContextOptions options) : base(options)
         {
         }
-        public DbSet<Book> Books { get; set; }
+        public DbSet<Book> Book { get; set; }
     }
 }
