@@ -2,26 +2,26 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BookList_Razor.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 
-namespace BookList_Razor.Model.BookList
+namespace BookList_Razor.Pages.BookList
 {
-    public class IndexModel : PageModel
+    public class EditModel : PageModel
     {
         private readonly DataBaseContext _db;
 
-        public IndexModel(DataBaseContext db)
+        public EditModel(DataBaseContext db)
         {
             _db = db;
         }
+        [ModelBinder]
+        public Book Book { get; set; }
 
-        public IEnumerable<Book> Books { get; set; }
-
-        public async Task OnGet()
+        public async void OnGet(int id)
         {
-            Books = await _db.Book.ToListAsync();
+            Book = await _db.Book.FindAsync(id);
         }
     }
 }
